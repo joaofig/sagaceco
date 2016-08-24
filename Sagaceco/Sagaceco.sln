@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagaceco.ServerLog", "Sagac
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Sagacipy", "Sagacipy\Sagacipy.pyproj", "{F09D781D-1723-4932-8B22-6A9B402545EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagaceco.TimeSeries", "Sagaceco.TimeSeries\Sagaceco.TimeSeries.csproj", "{622477A8-446B-4002-8721-ECFBD2595618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{B2CC25FF-352F-4B31-9EB3-FC8CBF64A763}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F09D781D-1723-4932-8B22-6A9B402545EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F09D781D-1723-4932-8B22-6A9B402545EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622477A8-446B-4002-8721-ECFBD2595618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622477A8-446B-4002-8721-ECFBD2595618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622477A8-446B-4002-8721-ECFBD2595618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622477A8-446B-4002-8721-ECFBD2595618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
