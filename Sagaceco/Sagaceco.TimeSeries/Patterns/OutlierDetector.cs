@@ -8,5 +8,6 @@ namespace Sagaceco.TimeSeries.Patterns
 {
     public class OutlierDetector
     {
+        // Nothing to see here. Move along!
     }
 }

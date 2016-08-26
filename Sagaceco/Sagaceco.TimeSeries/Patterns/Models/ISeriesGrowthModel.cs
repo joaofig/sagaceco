@@ -8,6 +8,8 @@ namespace Sagaceco.TimeSeries.Patterns.Models
 {
     interface ISeriesGrowthModel
     {
+        // Nothing to see here. Move along!
+
         double Update(double x);
     }
 }

@@ -22,10 +22,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExponentialMovingModel.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GenerateServerLog.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sagacipy.py" />
+    <Compile Include="ServerLogExample.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WeeklyLogModel.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
