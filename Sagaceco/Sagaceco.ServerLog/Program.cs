@@ -26,14 +26,16 @@ namespace Sagaceco.ServerLog
 
                 CsvReader csvReader = new CsvReader(streamReader, config);
 
-                IEnumerable<LogRecord> records = csvReader.GetRecords<LogRecord>(); 
+                LogRecord[] records = csvReader.GetRecords<LogRecord>().ToArray(); 
 
                 WeeklyLogModel weeklyModel = new WeeklyLogModel(0.1, 3.5);
+
+                //int count = records.Count();
 
                 foreach(LogRecord record in records)
                 {
                     if(record.Period > 32 * 2016 && weeklyModel.IsOutlier(record))
-                        Console.WriteLine("Outlier: {0} - {1} ({2})", record.Period, record.Value, weeklyModel.ExpectedValue(record));
+                        Console.WriteLine("Outlier: {0} - {1} ({2}, {3})", record.Period, record.Value, weeklyModel.GetAverage(record), Math.Sqrt(weeklyModel.GetVariance(record)) );
                     weeklyModel.Update(record);
                 }
             }

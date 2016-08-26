@@ -40,11 +40,18 @@ namespace Sagaceco.ServerLog
             return models[index].IsOutlier(radius, record.Value);
         }
 
-        public double ExpectedValue(LogRecord record)
+        public double GetAverage(LogRecord record)
         {
             int index = record.Period % models.Length;
 
             return models[index].Average;
+        }
+
+        public double GetVariance(LogRecord record)
+        {
+            int index = record.Period % models.Length;
+
+            return models[index].Variance;
         }
     }
 }

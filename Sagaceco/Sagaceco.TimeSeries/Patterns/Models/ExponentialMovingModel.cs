@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sagaceco.TimeSeries.Patterns.Models
 {
@@ -26,6 +22,11 @@ namespace Sagaceco.TimeSeries.Patterns.Models
         public double Average
         {
             get { return average; }
+        }
+
+        public double Variance
+        {
+            get { return variance; }
         }
 
         public void Update(double x)

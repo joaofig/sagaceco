@@ -1,7 +1,6 @@
 #
 # Generates the simulated server log
 #
-
 import csv
 import numpy as np
 import random
@@ -16,6 +15,7 @@ with open('server-log.csv', 'w', newline='') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames)
     writer.writeheader()
 
-    for i in range(0, 2016 * 52):
-        writer.writerow({'period': i, 'value': (base * (1 + growth)) + amplitude * np.sin( i * np.pi * 2 / 288 - np.pi / 2) + (random.random() * 2 * noise - noise) } )
+    for i in range(0, 2016 * 52 * 4):
+        row = {'period': i, 'value': (base * (1 + growth)) + amplitude * np.sin( i * np.pi * 2 / 288 - np.pi / 2) + (random.random() * 2 * noise - noise) }
+        writer.writerow(row)
 
