@@ -11,7 +11,7 @@ namespace Sagaceco.ServerLog
     {
         static void Main(string[] args)
         {
-            using (StreamReader streamReader = File.OpenText("server-log.csv"))
+            using (StreamReader streamReader = File.OpenText("server-log-bad.csv"))
             {
                 CsvConfiguration config = new CsvConfiguration()
                 {
@@ -25,17 +25,17 @@ namespace Sagaceco.ServerLog
 
                 LogRecord[] records = csvReader.GetRecords<LogRecord>().ToArray(); 
 
-                WeeklyLogModel weeklyModel = new WeeklyLogModel(0.1, 3.5);
+                WeeklyLogModel weeklyModel = new WeeklyLogModel(3.2);
 
                 //int count = records.Count();
 
                 foreach(LogRecord record in records)
                 {
                     if(record.Period > 32 * 2016 && weeklyModel.IsOutlier(record))
-                        Console.WriteLine("Outlier: {0} - {1} ({2}, {3})", record.Period, record.Value, weeklyModel.GetAverage(record), Math.Sqrt(weeklyModel.GetVariance(record)) );
+                        Console.WriteLine("Outlier: {0} - {1} ({2})", record.Period, record.Value, weeklyModel.GetValue(record) );
                     weeklyModel.Update(record);
                 }
-            }
+             }
         }
     }
 }

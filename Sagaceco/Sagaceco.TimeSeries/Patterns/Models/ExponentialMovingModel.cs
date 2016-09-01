@@ -2,7 +2,7 @@
 
 namespace Sagaceco.TimeSeries.Patterns.Models
 {
-    public class ExponentialMovingModel
+    public class ExponentialMovingModel : ISeriesModel
     {
         private double average = 0.0;
         private double variance = 0.0;
@@ -19,25 +19,15 @@ namespace Sagaceco.TimeSeries.Patterns.Models
 
         public double Weight { get; set; }
 
-        public double Average
-        {
-            get { return average; }
-        }
-
-        public double Variance
-        {
-            get { return variance; }
-        }
-
-        public void Update(double x)
+        public void Update(double x, double y)
         {
             if( average == 0.0 && variance == 0.0 )
             {
-                average = x;
+                average = y;
             }
             else
             {
-                double  diff    = x - average;
+                double  diff    = y - average;
                 double  incr    = Weight * diff;
 
                 average     = average + incr;
@@ -45,9 +35,14 @@ namespace Sagaceco.TimeSeries.Patterns.Models
             }
         }
 
-        public bool IsOutlier( double radius, double x )
+        public bool IsOutlier( double radius, double x, double y )
         {
-            return Math.Abs( x - average ) > radius * Math.Sqrt( variance );
+            return Math.Abs( y - average ) > radius * Math.Sqrt( variance );
+        }
+
+        public double GetValue(double x)
+        {
+            return average;
         }
     }
 }

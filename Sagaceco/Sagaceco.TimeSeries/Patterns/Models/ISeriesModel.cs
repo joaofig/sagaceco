@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Sagaceco.TimeSeries.Patterns.Models
 {
-    interface ISeriesGrowthModel
+    public interface ISeriesModel
     {
-        // Nothing to see here. Move along!
+        void Update(double x, double y);
 
-        double Update(double x);
+        bool IsOutlier(double radius, double x, double y);
+
+        double GetValue(double x);
     }
 }

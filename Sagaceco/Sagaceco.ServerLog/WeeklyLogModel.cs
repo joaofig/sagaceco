@@ -9,49 +9,46 @@ namespace Sagaceco.ServerLog
 {
     public class WeeklyLogModel
     {
-        private ExponentialMovingModel[] models = new ExponentialMovingModel[2016];
-        private double radius = 3.0;
+        private ISeriesModel[] models = new ISeriesModel[2016];
+        private double radius = 1.6;
 
         public WeeklyLogModel()
         {
             for(int i = 0; i < models.Length; i++)
-                models[i] = new ExponentialMovingModel();
+                models[i] = ModelBuilder();
         }
 
-        public WeeklyLogModel(double weight, double radius)
+        public WeeklyLogModel(double radius) : this()
         {
             this.radius = radius;
-
-            for(int i = 0; i < models.Length; i++)
-                models[i] = new ExponentialMovingModel(weight);
         }
 
         public void Update(LogRecord record)
         {
             int index = record.Period % models.Length;
 
-            models[index].Update(record.Value);
+            models[index].Update(record.Period, record.Value);
         }
 
         public bool IsOutlier(LogRecord record)
         {
             int index = record.Period % models.Length;
 
-            return models[index].IsOutlier(radius, record.Value);
+            return models[index].IsOutlier(radius, record.Period, record.Value);
         }
 
-        public double GetAverage(LogRecord record)
+        public double GetValue(LogRecord record)
         {
             int index = record.Period % models.Length;
 
-            return models[index].Average;
+            return models[index].GetValue(record.Period);
         }
 
-        public double GetVariance(LogRecord record)
-        {
-            int index = record.Period % models.Length;
+        //
 
-            return models[index].Variance;
+        private ISeriesModel ModelBuilder()
+        {
+            return new LinearRegressionModel();
         }
     }
 }
