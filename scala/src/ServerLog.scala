@@ -20,12 +20,12 @@ object ServerLog {
 class LogRecord(val period: Int, val value: Double)
 
 class WeeklyLogModel(val radius: Double) {
-  private var models = new Array[LinearRegressionModel](2016) 
+  private val models = new Array[LinearRegressionModel](2016) 
   
   for(i <- 0 to (models.length - 1))
     models(i) = new LinearRegressionModel
   
-  def update(record: LogRecord) = models(getIndex(record)).update(record.period, record.value)
+  def update(record: LogRecord) : Unit = models(getIndex(record)).update(record.period, record.value)
   
   def isOutlier(record: LogRecord): Boolean = models(getIndex(record)).isOutlier(radius, record.period, record.value)
   
@@ -44,7 +44,7 @@ class LinearRegressionModel {
   private var alpha: Double = 0.0
   private var beta: Double = 0.0
    
-  def update(x: Double, y: Double) {
+  def update(x: Double, y: Double) : Unit = {
     sumX += x
     sumY += y
     sumXY += x * y

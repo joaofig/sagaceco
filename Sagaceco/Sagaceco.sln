@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagaceco.TimeSeries", "Saga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagaceco.Blog", "Sagaceco.Blog\Sagaceco.Blog.csproj", "{C199AB83-2F0C-4CCC-AB63-61AA3DB2F8EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagaceco.UKAccidents", "Sagaceco.UKAccidents\Sagaceco.UKAccidents.csproj", "{82D18FBC-57FE-41E0-99ED-E6E065052747}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{C199AB83-2F0C-4CCC-AB63-61AA3DB2F8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C199AB83-2F0C-4CCC-AB63-61AA3DB2F8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C199AB83-2F0C-4CCC-AB63-61AA3DB2F8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82D18FBC-57FE-41E0-99ED-E6E065052747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D18FBC-57FE-41E0-99ED-E6E065052747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D18FBC-57FE-41E0-99ED-E6E065052747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D18FBC-57FE-41E0-99ED-E6E065052747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
