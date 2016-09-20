@@ -1,5 +1,10 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using NPOI.SS.UserModel;
+using Sagaceco.UKAccidents.DataModels;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 
 namespace Sagaceco.UKAccidents.ViewModels
 {
@@ -41,7 +46,31 @@ namespace Sagaceco.UKAccidents.ViewModels
 
         private void LoadData()
         {
+            List<LatLong> locations = new List<LatLong>();
 
+            using (StreamReader streamReader = File.OpenText("Data\\DfTRoadSafety_Accidents_2015.csv"))
+            {
+                int count = 0;
+                while (!streamReader.EndOfStream)
+                {
+                    string line = streamReader.ReadLine();
+
+                    if(count++ > 0 && !string.IsNullOrEmpty(line))
+                    {
+                        string[]    items       = line.Split(new char[] { ',' } );
+                        double      latitude    = 0.0;
+                        double      longitude   = 0.0;
+
+                        if(double.TryParse(items[3], NumberStyles.Any, CultureInfo.InvariantCulture, out latitude) &&
+                           double.TryParse(items[4], NumberStyles.Any, CultureInfo.InvariantCulture, out longitude))
+                        {
+                            LatLong location = new LatLong() { Latitude = latitude, Longitude = longitude };
+
+                            locations.Add(location);
+                        }
+                    }
+                }
+            }
         }
 
         private void ClusterData()
