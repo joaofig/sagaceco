@@ -8,7 +8,7 @@ namespace Sagaceco.UKAccidents.DataModels
 {
     public class ZoomData
     {
-        private SortedList<long,PointData>[]    layers  = new SortedList<long, PointData>[15];
+        private SortedList<long,PointData>[]    layers  = new SortedList<long, PointData>[16];
 
         public ZoomData()
         {

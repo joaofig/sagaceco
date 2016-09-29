@@ -47,7 +47,7 @@ namespace Sagaceco.UKAccidents.Map
         {
             WriteableBitmap bmp = new WriteableBitmap(264, 264, dpiX, dpiY, PixelFormats.Bgra32, null);
 
-            List<DotInfo> dots = new List<DotInfo>(5000);
+            List<DotInfo> dots = new List<DotInfo>(5000);       // Cache the dot information
 
             for (int y = 0; y < 264; y++)
             {
@@ -65,10 +65,11 @@ namespace Sagaceco.UKAccidents.Map
                     else if (accidents > 2)
                         dots.Add(new DotInfo(x, y, 2, Colors.OrangeRed));          //bmp.FillEllipseCentered(x, y, 2, 2, Colors.OrangeRed);
                     else if (accidents >= 1)
-                        dots.Add(new DotInfo(x, y, 1, Colors.DarkOrange));          //bmp.FillEllipseCentered(x, y, 1, 1, Colors.DarkOrange);
+                        dots.Add(new DotInfo(x, y, 1, Colors.Goldenrod));          //bmp.FillEllipseCentered(x, y, 1, 1, Colors.DarkOrange);
                 }
             }
 
+            // Place the dots in the specified hierarchy
             for(int radius = 1; radius < 4; radius++ )
             {
                 foreach(DotInfo dot in dots)

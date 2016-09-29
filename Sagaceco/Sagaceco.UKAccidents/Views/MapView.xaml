@@ -14,11 +14,14 @@
                        Description="Maps © [OpenStreetMap Contributors](http://www.openstreetmap.org/copyright)"
                        TileSource="http://{c}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                        MaxZoomLevel="19"/>
+        <map:TileLayer x:Key="MapBoxStreets" SourceName="MapBox" Description="MapBox" 
+                       TileSource="http://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoiam9hb2ZpZyIsImEiOiJjaXRvbGF3ZDIwMDA4MnpvZGI1dnQzendsIn0.X7imOZ3ylt9fNVtQ3VcTow"
+                       MaxZoomLevel="19" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
 
     <Grid>
-        <map:Map x:Name="map" TileLayer="{StaticResource OpenStreetMap}" Grid.Row="1" >
+        <map:Map x:Name="map" TileLayer="{StaticResource MapBoxStreets}" Grid.Row="1" >
             <Slider Orientation="Vertical" Minimum="1" Maximum="23" Value="{Binding ElementName=map,Path=ZoomLevel,Mode=TwoWay}" Height="160" Margin="4"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     x:Name="zoomControl"/>
