@@ -3,18 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
+        xmlns:views="clr-namespace:Sagaceco.UKAccidents.Views"
         xmlns:local="clr-namespace:Sagaceco.UKAccidents"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         mc:Ignorable="d"
         Title="UK Car Accidents" Height="350" Width="525">
 
     <Window.Resources>
-        <map:TileLayer x:Key="OpenStreetMap" SourceName="OpenStreetMap"
-                       Description="Maps © [OpenStreetMap Contributors](http://www.openstreetmap.org/copyright)"
-                       TileSource="http://{c}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                       MaxZoomLevel="19"/>
-
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </Window.Resources>
     
@@ -32,20 +27,15 @@
             </StackPanel>
         </Grid>
 
-        <map:Map x:Name="map" TileLayer="{StaticResource OpenStreetMap}" Grid.Row="1" >
-            <Slider Orientation="Vertical" Minimum="1" Maximum="23" Value="{Binding ElementName=map,Path=ZoomLevel,Mode=TwoWay}" Height="160" Margin="4"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
-                    x:Name="zoomControl"/>
-
-            <map:MapScale Margin="4" HorizontalAlignment="Right" Background="Transparent"/>
-        </map:Map>
+        <views:MapView x:Name="mapView" Grid.Row="1" />
 
         <StatusBar Grid.Row="2">
             <StatusBarItem>
-                <TextBlock Text="Ready" />
+                <TextBlock Text="{Binding StatusMessage,Mode=OneWay}" />
             </StatusBarItem>
             <StatusBarItem>
-                <ProgressBar Height="8" Width="200" Visibility="Collapsed" />
+                <ProgressBar Height="8" Width="200" Visibility="{Binding IsLoading,Converter={StaticResource BoolToVisibility}}"
+                             IsIndeterminate="{Binding IsLoading}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

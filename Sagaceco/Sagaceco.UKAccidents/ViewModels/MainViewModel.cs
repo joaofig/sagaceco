@@ -1,10 +1,14 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
+using MapControl;
 using NPOI.SS.UserModel;
 using Sagaceco.UKAccidents.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 
 namespace Sagaceco.UKAccidents.ViewModels
 {
@@ -22,6 +26,8 @@ namespace Sagaceco.UKAccidents.ViewModels
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ZoomData zoomData = new ZoomData();
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -42,12 +48,65 @@ namespace Sagaceco.UKAccidents.ViewModels
 
         public RelayCommand ClusterDataCommand { get; private set; }
 
+        private string statusMessage = "Ready";
+
+        public string StatusMessage
+        {
+            get { return statusMessage; }
+            set
+            {
+                if (statusMessage != value)
+                {
+                    statusMessage = value;
+                    RaisePropertyChanged("StatusMessage");
+                }
+            }
+        }
+
+        private bool isLoading;
+
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                if (isLoading != value)
+                {
+                    isLoading = value;
+                    RaisePropertyChanged("IsLoading");
+                }
+            }
+        }
+
+        private bool showAccidentsLayer;
+
+        public bool ShowAccidentsLayer
+        {
+            get { return showAccidentsLayer; }
+            set
+            {
+                if (showAccidentsLayer != value)
+                {
+                    showAccidentsLayer = value;
+                    RaisePropertyChanged("ShowAccidentsLayer");
+                }
+            }
+        }
+
+        public ZoomData ZoomData
+        {
+            get { return zoomData; }
+        }
         //
 
         private void LoadData()
         {
-            List<LatLong> locations = new List<LatLong>();
+            IsLoading = true;
+            ThreadPool.QueueUserWorkItem(LoadDataWorker);
+        }
 
+        private void LoadDataWorker(object state)
+        {
             using (StreamReader streamReader = File.OpenText("Data\\DfTRoadSafety_Accidents_2015.csv"))
             {
                 int count = 0;
@@ -61,16 +120,21 @@ namespace Sagaceco.UKAccidents.ViewModels
                         double      latitude    = 0.0;
                         double      longitude   = 0.0;
 
-                        if(double.TryParse(items[3], NumberStyles.Any, CultureInfo.InvariantCulture, out latitude) &&
-                           double.TryParse(items[4], NumberStyles.Any, CultureInfo.InvariantCulture, out longitude))
+                        if(double.TryParse(items[3], NumberStyles.Any, CultureInfo.InvariantCulture, out longitude) &&
+                           double.TryParse(items[4], NumberStyles.Any, CultureInfo.InvariantCulture, out latitude))
                         {
-                            LatLong location = new LatLong() { Latitude = latitude, Longitude = longitude };
-
-                            locations.Add(location);
+                            zoomData.AddAccident(latitude, longitude);
                         }
                     }
                 }
             }
+            DispatcherHelper.UIDispatcher.BeginInvoke(new Action(LoadDataWorkerCompleted));
+        }
+
+        private void LoadDataWorkerCompleted()
+        {
+            IsLoading = false;
+            ShowAccidentsLayer = true;
         }
 
         private void ClusterData()

@@ -42,14 +42,14 @@ namespace Sagaceco.UKAccidents.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            //SimpleIoc.Default.Register<MainViewModel>();
         }
 
         public MainViewModel Main
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return DependencyInjection.Get<MainViewModel>();
             }
         }
         

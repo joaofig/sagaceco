@@ -13,5 +13,11 @@ namespace Sagaceco.UKAccidents
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
+        }
     }
 }
