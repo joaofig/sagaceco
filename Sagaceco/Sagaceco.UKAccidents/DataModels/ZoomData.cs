@@ -8,12 +8,12 @@ namespace Sagaceco.UKAccidents.DataModels
 {
     public class ZoomData
     {
-        private SortedList<long,PointData>[]    layers  = new SortedList<long, PointData>[16];
+        private Dictionary<long,PointData>[]    layers  = new Dictionary<long, PointData>[16];
 
         public ZoomData()
         {
             for(int i = 0; i < layers.Length; i++)
-                layers[i] = new SortedList<long, PointData>(10000 * (i+1));
+                layers[i] = new Dictionary<long, PointData>(10000 * (i+1));
         }
 
         public void AddAccident(double latitude, double longitude)

@@ -23,7 +23,7 @@
         <Grid Background="LightSteelBlue">
             <StackPanel Orientation="Horizontal">
                 <Button Content="Load Data" Padding="12,1" Margin="8,4" Command="{Binding LoadDataCommand}" />
-                <Button Content="Find Clusters" Padding="12,1" Margin="8,4" Command="{Binding ClusterDataCommand}" />
+                <!--<Button Content="Find Clusters" Padding="12,1" Margin="8,4" Command="{Binding ClusterDataCommand}" />-->
             </StackPanel>
         </Grid>
 

@@ -34,9 +34,9 @@ namespace Sagaceco.UKAccidents.Map
             this.zoomData = zoomData;
         }
 
-        public /*async*/ void Paint()
+        public void Paint()
         {
-            WriteableBitmap bitmap = PaintTile();   // await Task.Run(() => PaintTile());
+            WriteableBitmap bitmap = PaintTile();
 
             tile.SetImage(bitmap);
         }
@@ -61,7 +61,7 @@ namespace Sagaceco.UKAccidents.Map
                     int     accidents   = zoomData.GetAccidentCountAt(pixelKey, tile.ZoomLevel + 8);
 
                     if (accidents > 5)
-                        dots.Add(new DotInfo(x, y, 3, Colors.DarkRed) );           //bmp.FillEllipseCentered(x, y, 3, 3, Colors.DarkRed);
+                        dots.Add(new DotInfo(x, y, 3, Colors.Red) );           //bmp.FillEllipseCentered(x, y, 3, 3, Colors.DarkRed);
                     else if (accidents > 2)
                         dots.Add(new DotInfo(x, y, 2, Colors.OrangeRed));          //bmp.FillEllipseCentered(x, y, 2, 2, Colors.OrangeRed);
                     else if (accidents >= 1)
@@ -105,9 +105,9 @@ namespace Sagaceco.UKAccidents.Map
                     int r = b + 2;
                     int a = b + 3;
 
-                    byte colorG = 0;        //(distribution.BrandenburgDensity(location.Latitude, location.Longitude) / distribution.MaxBrandenburg * 255);
-                    byte colorB = 0;        //(distribution.RiverDensity(location.Latitude, location.Longitude) / distribution.MaxRiver * 255);
-                    byte colorR = 0xff;     //(distribution.SatelliteDensity(location.Latitude, location.Longitude) / distribution.MaxSatellite * 255);
+                    byte colorG = 0;
+                    byte colorB = 0;
+                    byte colorR = 0xff;
 
                     buffer[b] = colorB;
                     buffer[g] = colorG;

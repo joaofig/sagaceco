@@ -102,6 +102,7 @@ namespace Sagaceco.UKAccidents.ViewModels
         private void LoadData()
         {
             IsLoading = true;
+            StatusMessage = "Loading...";
             ThreadPool.QueueUserWorkItem(LoadDataWorker);
         }
 
@@ -134,6 +135,7 @@ namespace Sagaceco.UKAccidents.ViewModels
         private void LoadDataWorkerCompleted()
         {
             IsLoading = false;
+            StatusMessage = "Ready";
             ShowAccidentsLayer = true;
         }
 
